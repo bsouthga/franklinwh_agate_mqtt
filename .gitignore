@@ -1,3 +1,4 @@
 env
 data
 secrets.json
+.DS_Store

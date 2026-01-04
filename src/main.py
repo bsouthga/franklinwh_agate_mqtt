@@ -4,7 +4,7 @@ import json
 from paho.mqtt.enums import CallbackAPIVersion
 import paho.mqtt.client as mqtt
 
-TOPIC_PREFIX = 'FranklinWH_AGate'
+TOPIC_PREFIX = 'FranklinWH'
 
 EXCLUDE_KEYS = {'ID', 'MnAlrmInfo'}
 
@@ -29,7 +29,7 @@ class Agate:
         mqtt_pass=None,
         mqtt_port=None,
         mqtt_host=None,
-        mqtt_client_id='FranklinWHAgate',
+        mqtt_client_id='FranklinWH',
         sleep=30,
     ) -> None:
         self._client = client.SunSpecModbusClientDeviceTCP(
@@ -64,7 +64,7 @@ class Agate:
     def get_model_topics(self, model, prefix):
         for key, value in model.items():
             if not key in EXCLUDE_KEYS:
-                topic: tuple[str, float | int] | None = self.get_topic(f"{TOPIC_PREFIX}_{prefix}_{key}", value)
+                topic: tuple[str, float | int] | None = self.get_topic(f"{TOPIC_PREFIX}/AGate/{prefix}/{key}", value)
                 if topic is not None:
                     yield topic
 
